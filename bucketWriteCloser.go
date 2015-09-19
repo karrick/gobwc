@@ -115,7 +115,9 @@ func (bw *BucketWriteCloser) Write(data []byte) (int, error) {
 					return len(data), nil
 				}
 			}
-			bw.buckets = append(bw.buckets, data)
+			cpy := make([]byte, len(data))
+			copy(cpy, data)
+			bw.buckets = append(bw.buckets, cpy)
 			return len(data), nil
 		}
 	}
